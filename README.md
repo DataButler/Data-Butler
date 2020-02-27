@@ -9,7 +9,7 @@ It takes a lot of man-hours and energy to transform data dumps into forms that a
 ### Installation(WIP)
 
 ```sh
-$ pip install
+$ pip install --index-url https://test.pypi.org/simple/ db_st
 ```
 ### Directions(WIP)
 
