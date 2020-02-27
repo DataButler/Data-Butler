@@ -6,12 +6,12 @@ It takes a lot of man-hours and energy to transform data dumps into forms that a
 ### Process Flow
 ![Methodology](https://github.com/DataButler/Data-Butler/blob/master/Processflow.png)
 
-### Installation
+### Installation(WIP)
 
 ```sh
 $ pip install
 ```
-### Directions
+### Directions(WIP)
 
 ### Authors
 Keerthi Pullela, Rahul Madhu, Rukmini Sunil, Sagar Kurada, Xema Pathak
