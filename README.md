@@ -6,17 +6,13 @@ It takes a lot of man-hours and energy to transform this data dump into forms th
 ### Process Flow
 ![Methodology](https://github.com/DataButler/Data-Butler/blob/master/Processflow.png)
 
-### Installation (WIP)
-
-Dillinger requires [Node.js](https://nodejs.org/) v4+ to run.
-
-Install the dependencies and devDependencies and start the server.
+### Installation
 
 ```sh
-$ cd dillinger
-$ npm install -d
-$ node app
+$ pip install
 ```
+### Directions
+
 ### Authors
 Keerthi Pullela, Rahul Madhu, Rukmini Sunil, Sagar Kurada, Xema Pathak
 
