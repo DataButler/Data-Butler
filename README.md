@@ -17,6 +17,6 @@ $ pip install
 Keerthi Pullela, Rahul Madhu, Rukmini Sunil, Sagar Kurada, Xema Pathak
 
 ### Acknowledgments
-Professor. Matthew Lanham, 
+Professor Matthew Lanham, 
 Krannert School of Management,
 Purdue University
