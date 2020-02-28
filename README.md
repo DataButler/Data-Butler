@@ -11,9 +11,10 @@ It takes a lot of man-hours and energy to transform data dumps into forms that a
 ```sh
 $ pip install --index-url https://test.pypi.org/simple/ db_st
 ```
-### Directions(WIP)
+### Directions
 ```sh
 import data_butler
+
 data_butler.db('file directory/filename.csv')
 ```
 ### Authors
@@ -22,6 +23,6 @@ Keerthi Pullela, Rahul Madhu, Rukmini Sunil, Sagar Kurada, Xema Pathak
 ### Acknowledgments
 Professor Matthew Lanham, 
 Krannert School of Management,
-Purdue University
-Mike Lutz, Caleb Keller
+Purdue University\
+Mike Lutz, Caleb Keller, 
 Samtec Inc. 
