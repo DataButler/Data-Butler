@@ -6,13 +6,16 @@ It takes a lot of man-hours and energy to transform data dumps into forms that a
 ### Process Flow
 ![Methodology](https://github.com/DataButler/Data-Butler/blob/master/Processflow.png)
 
-### Installation(WIP)
+### Installation
 
 ```sh
 $ pip install --index-url https://test.pypi.org/simple/ db_st
 ```
 ### Directions(WIP)
-
+```sh
+import data_butler
+data_butler.db('file directory/filename.csv')
+```
 ### Authors
 Keerthi Pullela, Rahul Madhu, Rukmini Sunil, Sagar Kurada, Xema Pathak
 
@@ -20,3 +23,5 @@ Keerthi Pullela, Rahul Madhu, Rukmini Sunil, Sagar Kurada, Xema Pathak
 Professor Matthew Lanham, 
 Krannert School of Management,
 Purdue University
+Mike Lutz, Caleb Keller
+Samtec Inc. 
