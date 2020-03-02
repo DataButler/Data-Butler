@@ -6,7 +6,7 @@
 # Supports U.S county names, valid for both upper case and lower case. 
 # Accounts for both cases, with and without suffix "county". Eg: Allows both "Tippecanoe" and "Tippecanoe County" 
 
-# In[37]:
+# In[94]:
 
 
 import geonamescache                      #County library
@@ -33,7 +33,7 @@ def county_chk(strn):                    #Checks if passed string is a county
 # Supports major cities all across the world. Valid for both upper case and lower case.
 # 
 
-# In[38]:
+# In[95]:
 
 
 import geonamescache
@@ -55,7 +55,7 @@ def city_chk(strn):                                         #Checks if passed st
 
 # Supports U.S state names, valid for both upper case and lower case. Allows both full state name and alpha codes. Eg: "Indiana" and "IN"
 
-# In[39]:
+# In[96]:
 
 
 import geonamescache
@@ -81,7 +81,7 @@ def state_chk(strn):
 
 # Supports country names across the globe, valid for both upper case and lower case. Allows colloquial name, official name, official two character and three character alpha codes. Eg: "United States", "United States of America", "US", "USA"
 
-# In[40]:
+# In[97]:
 
 
 import pycountry
@@ -117,7 +117,7 @@ def country_chk(strn):
 
 # Detects popular currencies upto 2 decimal points. Supported currency representations: $, USD, usd, CAD, €, EUR, EURO, euro, eur, £, JPY, ¥, CNY, GBP
 
-# In[41]:
+# In[98]:
 
 
 def currency_chk(amount):
@@ -144,7 +144,7 @@ def currency_chk(amount):
 # Maximum of 12 digits and minimum of 6 digits is allowed
 # 
 
-# In[42]:
+# In[99]:
 
 
 def phone_chk(number):
@@ -194,7 +194,7 @@ def phone_chk(number):
 # 18. UATP
 # 19. Verve
 
-# In[43]:
+# In[100]:
 
 
 def credit_card_chk(card_number):
@@ -227,7 +227,7 @@ def credit_card_chk(card_number):
 # Mail ID starting character should be aplhamnumeric. 
 # Should have 2 or 3 characters at the end after '.'
 
-# In[44]:
+# In[101]:
 
 
 def email_chk(val):    
@@ -247,7 +247,7 @@ def email_chk(val):
 # It also incorporates URLs with IP or server addresses like "http://localhost:8889/notebooks/Functions_Data%20Profiling.ipynb"
 # 
 
-# In[45]:
+# In[102]:
 
 
 def url_chk(val):    
@@ -272,7 +272,7 @@ def url_chk(val):
 
 # Detects months where the input is either the entire name or the three character short form. Not checking for numbers, since this would cause other numeric fields to be identified as months when their range is under 12
 
-# In[46]:
+# In[103]:
 
 
 month=['jan','january','feb','february','mar','march','apr','april','may','jun','june','jul','july','aug','august','sep','september','oct','october','nov','november','dec','december']
@@ -296,7 +296,7 @@ def month_chk(string):
 # 4. Space or no-space between ineteger and the temp (CcFf) symbol
 # 
 
-# In[47]:
+# In[104]:
 
 
 def temperature_chk(string):
@@ -311,7 +311,7 @@ def temperature_chk(string):
 
 # # 12.Distance
 
-# In[48]:
+# In[105]:
 
 
 def distance_chk(string):
@@ -338,11 +338,38 @@ def distance_chk(string):
 # 
 # Also checks for same formats even when / is used instead of -
 
-# In[49]:
+# In[106]:
 
 
 import datetime
 def date_chk(date_time_str):
+    try:
+        num = date_time_str.replace(' ','')
+        if len(num) == 6:
+            if (100>int(num[:2])>=90) or (int(num[:2])<25):
+                if int(num[2:4])<=12 and int(num[4:])<=31:
+                    return 'Valid'
+                if int(num[2:4])<=31 and int(num[4:])<=12:
+                    return 'Valid'
+            if (100>int(num[:2])>=90) or (int(num[:2])<25):
+                if int(num[:2])<=12 and int(num[2:4])<=31:
+                    return 'Valid'
+                if int(num[:2])<=31 and int(num[2:4])<=12:
+                    return 'Valid'
+        if len(num) == 8:
+            if int(num[:4])>=1990 and int(num[:4])<2025:
+                if int(num[4:6])<=12 and int(num[6:])<=31:
+                    return 'Valid'
+                if int(num[4:6])<=31 and int(num[6:])<=12:
+                    return 'Valid'
+            if int(num[-4:])>=1990 and int(num[-4:])<2025:
+                if int(num[:2])<=12 and int(num[2:4])<=31:
+                    return 'Valid'
+                if int(num[:2])<=31 and int(num[2:4])<=12:
+                    return 'Valid'
+    except:
+        pass
+    
     if date_time_str.find('/') == -1 and date_time_str.find('-') == -1:
         return 'Not Valid'
     try:
@@ -452,7 +479,7 @@ def date_chk(date_time_str):
 # 1. HH:MM
 # 2. HH:MM:SS
 
-# In[50]:
+# In[107]:
 
 
 def time_chk(date_time_str):
@@ -481,7 +508,7 @@ def time_chk(date_time_str):
 
 # Checking for anmials from an online repository, case insensitive
 
-# In[51]:
+# In[108]:
 
 
 import urllib.request
@@ -500,7 +527,7 @@ def animal_chk(string):
 
 # Using a spacy model "en_core_web_sm" to check if a string could possibly be a name
 
-# In[52]:
+# In[109]:
 
 
 #Can be installed from the below link
@@ -509,7 +536,7 @@ import en_core_web_sm                               #importing en_core_web_sm us
 nlp = en_core_web_sm.load()                          
 
 
-# In[53]:
+# In[110]:
 
 
 def name_chk(string):
@@ -524,7 +551,7 @@ def name_chk(string):
 
 # Check if input string is a gender. Considering either male and female or m and f
 
-# In[54]:
+# In[111]:
 
 
 def gender_chk(string):
@@ -539,7 +566,7 @@ def gender_chk(string):
 
 # Checking if input is binary data, 1 and 0, or true and false, or t and f. Later validating that the column does in fact hold binary data by validating against unique values
 
-# In[55]:
+# In[112]:
 
 
 def binary_chk(string):
@@ -561,13 +588,13 @@ def binary_chk(string):
 # 1. Date Time
 # 2. Time Date
 
-# In[56]:
+# In[113]:
 
 
 def datetime_chk(string):
     try:
         dtm = string.split()                                                #splitting into string
-        if len(dtm) == 2:
+        if len(dtm) == 2:                                                   #Checking if individual parts are date and time
             if date_chk(dtm[0]) == 'Valid' and time_chk(dtm[1]) == 'Valid':  
                 return 'Valid'
             if date_chk(dtm[1]) == 'Valid' and time_chk(dtm[0]) == 'Valid':
@@ -577,7 +604,7 @@ def datetime_chk(string):
     return 'Not Valid'        
 
 
-# In[57]:
+# In[114]:
 
 
 #Setting such that warnings, in case of any, aren't displayed in between the output
@@ -591,7 +618,7 @@ if not sys.warnoptions:
 
 # # Graphs
 
-# In[59]:
+# In[115]:
 
 
 def graph(data,filename):
@@ -646,7 +673,7 @@ def graph(data,filename):
 
 # Sampling the data:
 
-# In[61]:
+# In[116]:
 
 
 def sample(data):
@@ -661,7 +688,7 @@ def sample(data):
 
 # List of entity columns to be tested
 
-# In[62]:
+# In[117]:
 
 
 funclist = [county_chk,city_chk,state_chk,country_chk,currency_chk,phone_chk,credit_card_chk,email_chk,url_chk,date_chk,time_chk,distance_chk,temperature_chk,month_chk,animal_chk,name_chk,gender_chk,binary_chk,datetime_chk]
@@ -670,30 +697,30 @@ funclist_num = [phone_chk,credit_card_chk,binary_chk]
 
 # Confidence Score Function:
 
-# In[63]:
+# In[118]:
 
 
+import random
+from prettytable import PrettyTable
 def cscore(data):
     '''Function to calculate the confidence score for each column'''
-    import random
     print('\nCONFIDENCE SCORES:\n ')
     data = sample(data)
-    data_dict = data.to_dict()                                 #converting dataframe to dictionary 
-    from prettytable import PrettyTable
-    x = PrettyTable()
+    data_dict = data.to_dict()                                 #converting dataframe to dictionary for performance
+    x = PrettyTable()                                          #Pretty table to improve output presentation
     x.field_names = ["Column Name", "Tested Entity", "Confidence Score"]
     
-    for i in data_dict.keys():
-        u = data[i].nunique()
-        try:
+    for i in data_dict.keys():                                 #Iterating through all the columns
+        u = data[i].nunique()                                  #Unique count in column
+        try:                                                   #If numeric column, checking for fewer entities. To improve runtime
             pd.to_numeric(data[i])
             func = funclist_num
         except:
             func = funclist
         chk = 0
-        for j in func:
-            func_str = str(j)[10:str(j).find('at ')-5]
-            if (func_str == 'name' or func_str == 'city' or func_str == 'county') and len(data_dict[i].items())>300:
+        for j in func:                                         #Iterating through every entity function
+            func_str = str(j)[10:str(j).find('at ')-5]         #Getting the name of entity from the function name
+            if (func_str == 'name' or func_str == 'city' or func_str == 'county') and len(data_dict[i].items())>300:     #Limiting testing values for name entity check to improve runtime
                 d2 = dict((k,j(str(v))) for k, v in random.sample(data_dict[i].items(),k=300))
             else:    
                 d2 = dict((k,j(str(v))) for k, v in data_dict[i].items())
@@ -715,7 +742,9 @@ def cscore(data):
     print(x)
 
 
-# In[64]:
+# Performing basic EDA
+
+# In[119]:
 
 
 import matplotlib.pyplot as plt
@@ -723,12 +752,12 @@ def eda(data):
     rw = data.shape[0]
     print('Rows: ',str(rw))
     print('Columns: ',str(data.shape[1]),'\n')
-    pk = []
-    mis = []
+    pk = []                                                       #List to store columns that are possible primary keys
+    mis = []                                                      #List to store columns with missing data
     from prettytable import PrettyTable
 
-    for col in data:
-        print('Column Name:',col)
+    for col in data:                                             
+        print('Column Name:',col)                                 
         u = data[col].nunique()
         print('Unique Value Count:',u)
         if u == rw:
@@ -784,7 +813,7 @@ def eda(data):
         
 
 
-# In[74]:
+# In[120]:
 
 
 import os  
@@ -802,4 +831,10 @@ def graphs(filename):
     df = pd.read_csv(filename, index_col=None, header=0) 
     graph(df,filename)
     
+
+
+# In[123]:
+
+
+db(r'C:\Users\rahul\OneDrive\Desktop\Samtec\avocado.csv')
 
