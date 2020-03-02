@@ -9,7 +9,11 @@ It takes a lot of man-hours and energy to transform data dumps into forms that a
 ### Installation
 
 ```sh
-$ pip install --index-url https://test.pypi.org/simple/ db_st
+pip install data_butler
+
+#In case of missing English spacy model (en_core_web_sm)
+pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.0/en_core_web_sm-2.2.0.tar.gz
+
 ```
 ### Directions
 ```sh
