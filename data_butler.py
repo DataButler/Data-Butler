@@ -337,13 +337,15 @@ def distance_chk(string):
 # 8. d-m-yy
 # 
 # Also checks for same formats even when / is used instead of -
+# 
+# Added the functionality to check if a numeric value could possibly be a date. For eg 02032020, 02 03 2020. Have checked for all the above date formats in this numeric manner as well
 
-# In[106]:
+# In[125]:
 
 
 import datetime
 def date_chk(date_time_str):
-    try:
+    try:                                                             #Logic to check if an entered number could possibly be a date
         num = date_time_str.replace(' ','')
         if len(num) == 6:
             if (100>int(num[:2])>=90) or (int(num[:2])<25):
@@ -370,7 +372,7 @@ def date_chk(date_time_str):
     except:
         pass
     
-    if date_time_str.find('/') == -1 and date_time_str.find('-') == -1:
+    if date_time_str.find('/') == -1 and date_time_str.find('-') == -1:    #Logic to check if a string entry is a date
         return 'Not Valid'
     try:
         datetime.datetime.strptime(date_time_str, '%Y-%m-%d')
@@ -692,7 +694,7 @@ def sample(data):
 
 
 funclist = [county_chk,city_chk,state_chk,country_chk,currency_chk,phone_chk,credit_card_chk,email_chk,url_chk,date_chk,time_chk,distance_chk,temperature_chk,month_chk,animal_chk,name_chk,gender_chk,binary_chk,datetime_chk]
-funclist_num = [phone_chk,credit_card_chk,binary_chk]
+funclist_num = [phone_chk,credit_card_chk,binary_chk,date_chk]
 
 
 # Confidence Score Function:
