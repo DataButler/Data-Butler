@@ -834,9 +834,3 @@ def graphs(filename):
     graph(df,filename)
     
 
-
-# In[123]:
-
-
-db(r'C:\Users\rahul\OneDrive\Desktop\Samtec\avocado.csv')
-
