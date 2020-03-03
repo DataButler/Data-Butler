@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="data_butler",  # Replace with your own username
-    version="0.0.7",
+    version="0.0.9",
     author="Rahul Madhu",
     author_email="rahul.madhu93@gmail.com",
     description="A data cataloguing package",

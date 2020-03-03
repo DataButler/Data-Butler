@@ -22,7 +22,7 @@ for i in co:                             #Creating a list of all counties
 def county_chk(strn):                    #Checks if passed string is a county
     '''Function to detect the validity of the county name'''
     if strn.upper() not in counties:
-        return 'Not valid'
+        return 'Not Valid'
     else:
         return 'Valid'
 
@@ -33,7 +33,7 @@ def county_chk(strn):                    #Checks if passed string is a county
 # Supports major cities all across the world. Valid for both upper case and lower case.
 # 
 
-# In[95]:
+# In[147]:
 
 
 import geonamescache
@@ -42,6 +42,7 @@ c = gc.get_cities()
 cities = [c[key]['name'] for key in list(c.keys())]         #Creating a list of cities
 cities = list(map(lambda x:x.upper(), cities))              #Converting them all to upper case
 cities = [x for x in cities if str(x) != 'NAN']             #Removing NULL value
+cities.remove('MALE')                                       #Remove city name male, since it causes confusion with gender entity
 
 def city_chk(strn):                                         #Checks if passed string is in the cities list
     '''Function to detect the validity of the city name'''
@@ -81,7 +82,7 @@ def state_chk(strn):
 
 # Supports country names across the globe, valid for both upper case and lower case. Allows colloquial name, official name, official two character and three character alpha codes. Eg: "United States", "United States of America", "US", "USA"
 
-# In[97]:
+# In[156]:
 
 
 import pycountry
@@ -94,7 +95,7 @@ for i in cntrs:
     c_name.append(i.name.upper())                      #Common name list
     if i.name.find(',')!=-1:
         c_name.append((i.name[i.name.find(',')+2:]+' '+i.name[:i.name.find(',')]).upper())
-    for j in ('IRAN','RUSSIA','SOUTH KOREA','VIETNAM','BOLIVIA','TAIWAN','UK','SYRIA','VENEZUELA'): #Adding a few commonly used name structures which are stored differently in the library 
+    for j in ('IRAN','RUSSIA','SOUTH KOREA','KOREA','VIETNAM','BOLIVIA','TAIWAN','UK','SYRIA','VENEZUELA'): #Adding a few commonly used name structures which are stored differently in the library 
         c_name.append(j)
     try:
         official_name.append(i.official_name.upper())  #Official name list
@@ -553,7 +554,7 @@ def name_chk(string):
 
 # Check if input string is a gender. Considering either male and female or m and f
 
-# In[111]:
+# In[134]:
 
 
 def gender_chk(string):
@@ -604,6 +605,25 @@ def datetime_chk(string):
     except:
         pass
     return 'Not Valid'        
+
+
+# # 20. SSN
+
+# Checking if SSN is entered in the following format: ddd-dd-dddd
+
+# In[160]:
+
+
+def ssn_chk(ssn):
+    try:
+        chunks = ssn.split('-')
+        if len(chunks) ==3: 
+            if len(chunks[0])==3 and len(chunks[1])==2 and len(chunks[2])==4:
+                tst = int(chunks[0]+chunks[1]+chunks[2])
+                return 'Valid'
+        return 'Not Valid'
+    except:
+        return 'Not Valid'
 
 
 # In[114]:
@@ -690,16 +710,16 @@ def sample(data):
 
 # List of entity columns to be tested
 
-# In[117]:
+# In[165]:
 
 
-funclist = [county_chk,city_chk,state_chk,country_chk,currency_chk,phone_chk,credit_card_chk,email_chk,url_chk,date_chk,time_chk,distance_chk,temperature_chk,month_chk,animal_chk,name_chk,gender_chk,binary_chk,datetime_chk]
+funclist = [county_chk,city_chk,state_chk,country_chk,currency_chk,phone_chk,credit_card_chk,email_chk,url_chk,date_chk,time_chk,distance_chk,temperature_chk,month_chk,animal_chk,name_chk,gender_chk,binary_chk,datetime_chk,ssn_chk]
 funclist_num = [phone_chk,credit_card_chk,binary_chk,date_chk]
 
 
 # Confidence Score Function:
 
-# In[118]:
+# In[166]:
 
 
 import random
@@ -714,6 +734,7 @@ def cscore(data):
     
     for i in data_dict.keys():                                 #Iterating through all the columns
         u = data[i].nunique()                                  #Unique count in column
+        cnt = data[i].count()                                  #Count of non null values
         try:                                                   #If numeric column, checking for fewer entities. To improve runtime
             pd.to_numeric(data[i])
             func = funclist_num
@@ -728,7 +749,7 @@ def cscore(data):
                 d2 = dict((k,j(str(v))) for k, v in data_dict[i].items())
             d3= {k:(1 if v=='Valid' else 0 ) for (k,v) in d2.items()}
             a=[v for v in d3.values()]
-            accuracy=round((sum(a)/len(a))*100,2)               #calculating the confidence score(proper fit score)
+            accuracy=round((sum(a)/cnt)*100,2)               #calculating the confidence score(proper fit score)
             if func_str == 'binary' and u!=2:
                 accuracy = 0
             if accuracy != 0:
@@ -746,7 +767,7 @@ def cscore(data):
 
 # Performing basic EDA
 
-# In[119]:
+# In[167]:
 
 
 import matplotlib.pyplot as plt
@@ -815,7 +836,7 @@ def eda(data):
         
 
 
-# In[120]:
+# In[168]:
 
 
 import os  
